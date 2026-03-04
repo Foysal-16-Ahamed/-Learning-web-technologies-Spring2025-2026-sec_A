@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+</head>
+<body>
+
+<center>
+    <br><br>
+    <table border="0" cellpadding="10" id="calc">
+
+        <!-- Bigger Display -->
+        <tr>
+            <td colspan="4">
+                <input type="text" id="display" value="0" size="28" readonly>
+            </td>
+        </tr>
+
+        <!-- Top Buttons -->
+        <tr>
+            <td><button onclick="clearDisplay()">C</button></td>
+            <td><button onclick="backspace()">←</button></td>
+            <td><button onclick="squareRoot()">√</button></td>
+            <td><button onclick="press('%')">%</button></td>
+        </tr>
+
+        <!-- Numbers -->
+        <tr>
+            <td><button onclick="press('7')">7</button></td>
+            <td><button onclick="press('8')">8</button></td>
+            <td><button onclick="press('9')">9</button></td>
+            <td><button onclick="press('/')">÷</button></td>
+        </tr>
+
+        <tr>
+            <td><button onclick="press('4')">4</button></td>
+            <td><button onclick="press('5')">5</button></td>
+            <td><button onclick="press('6')">6</button></td>
+            <td><button onclick="press('*')">×</button></td>
+        </tr>
+
+        <tr>
+            <td><button onclick="press('1')">1</button></td>
+            <td><button onclick="press('2')">2</button></td>
+            <td><button onclick="press('3')">3</button></td>
+            <td><button onclick="press('-')">-</button></td>
+        </tr>
+
+        <tr>
+            <td><button onclick="press('0')">0</button></td>
+            <td><button onclick="press('00')">00</button></td>
+            <td><button onclick="press('.')">.</button></td>
+            <td><button onclick="press('+')">+</button></td>
+        </tr>
+
+        <tr>
+            <td colspan="4">
+                <button onclick="calculate()">=</button>
+            </td>
+        </tr>
+
+    </table>
+</center>
+
+<script>
+
+var display = document.getElementById("display");
+var buttons = document.getElementsByTagName("button");
+var table = document.getElementById("calc");
+
+/* ----------- BLACK & WHITE DESIGN ----------- */
+
+document.body.style.backgroundColor = "black";
+document.body.style.color = "white";
+
+table.style.backgroundColor = "white";
+table.style.padding = "25px";
+
+/* Bigger Display */
+display.style.backgroundColor = "white";
+display.style.color = "black";
+display.style.height = "60px";
+display.style.fontSize = "26px";
+display.style.fontWeight = "bold";
+
+/* Button Styling */
+for (var i = 0; i < buttons.length; i++) {
+
+    buttons[i].style.width = "65px";
+    buttons[i].style.height = "45px";
+    buttons[i].style.fontSize = "18px";
+    buttons[i].style.backgroundColor = "white";
+    buttons[i].style.color = "black";
+    buttons[i].style.border = "1px solid black";
+
+    if (buttons[i].innerText == "=") {
+        buttons[i].style.backgroundColor = "black";
+        buttons[i].style.color = "white";
+        buttons[i].style.width = "100%";
+        buttons[i].style.height = "50px";
+    }
+}
+
+/* ----------- FUNCTIONS ----------- */
+
+function press(value) {
+    if (display.value == "0") {
+        display.value = value;
+    } else {
+        display.value += value;
+    }
+}
+
+function calculate() {
+    try {
+        display.value = eval(display.value);
+    } catch {
+        display.value = "Error";
+    }
+}
+
+function clearDisplay() {
+    display.value = "0";
+}
+
+function backspace() {
+    display.value = display.value.slice(0, -1);
+    if (display.value == "") {
+        display.value = "0";
+    }
+}
+
+function squareRoot() {
+    try {
+        display.value = Math.sqrt(eval(display.value));
+    } catch {
+        display.value = "Error";
+    }
+}
+
+</script>
+
+</body>
+</html>
