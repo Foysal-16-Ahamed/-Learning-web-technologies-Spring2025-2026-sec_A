@@ -1,1 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Product Page</h2>
+
+    <p>Unit Price</p>
+    <input type="text" id="price" value="1000" readonly>
+
+    <p>Quantity</p>
+    <input type="number" id="qty" value="0" min="0">
+
+    <p>Total Price</p>
+    <input type="text" id="total" readonly>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+body
+{
+    font-family: Arial;
+    background-color: #eeeeee;
+}
+
+.container
+{
+    width: 320px;
+    margin: 120px auto;
+    padding: 20px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+input
+{
+    width: 100%;
+    padding: 7px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+const unitPrice = 1000;
+
+const quantity = document.getElementById("qty");
+const total = document.getElementById("total");
+
+quantity.addEventListener("keyup", calculateTotal);
+
+function calculateTotal()
+{
+    let q = parseInt(quantity.value);
+
+    if (q < 0 || isNaN(q))
+    {
+        q = 0;
+        quantity.value = 0;
+    }
+
+    let result = unitPrice * q;
+
+    total.value = result;
+
+    if (result > 1000)
+    {
+        alert("Congratulations! You got a Gift Coupon.");
+    }
+}
